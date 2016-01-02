@@ -10,6 +10,7 @@ const STATE_HIGHSCORE = 16
 var game_state = STATE_INTRO
 var comet_scene = preload('res://entities/comet.xscn')
 var enemy_scene = preload('res://entities/enemy.xscn')
+var bullet_scene = preload('res://entities/shoot.xscn')
 var comet
 var enemies = []
 var gui
@@ -29,11 +30,19 @@ func start_game():
 	self.game_layer.add_child(self.comet)
 	self.set_game_speed(1)
 	self.game_state = STATE_GAME
-
+	self.spawn_enemy()
+	self.spawn_enemy()
+	self.spawn_enemy()
+	
 func spawn_enemy():
 	var enemy = self.enemy_scene.instance()
 	self.game_layer.add_child(enemy)
 	self.enemies.append(enemy)
+
+func shoot():
+	var bullet = self.bullet_scene.instance()
+	bullet.initialize(self.comet.get_pos())
+	self.game_layer.add_child(bullet)
 
 func set_game_speed(speed_diff):
 	self.speed += speed_diff
@@ -51,16 +60,15 @@ func _input(ev):
 		if(ev.type==InputEvent.MOUSE_MOTION):
 			self.comet.set_pos(ev.pos)
 		if(ev.type==InputEvent.MOUSE_BUTTON):
-			#self.set_game_speed(0.25)
-			self.spawn_enemy()
+			self.shoot()
 
 
 func _ready():
 	self.game_layer = self.get_node("game")
 	self.space_layer = self.get_node("space")
 	self.gui = self.get_node("GUI")
-	self.score_label = self.gui.get_node("game/score")
-	self.speed_label = self.gui.get_node("game/speed")
+	self.score_label = self.gui.get_node("game/panel/score")
+	self.speed_label = self.gui.get_node("game/panel/speed")
 	
 	set_process_input(true)
 	set_process(true)
