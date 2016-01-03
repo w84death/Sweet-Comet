@@ -1,6 +1,7 @@
 
 extends Node2D
 
+var particle
 var screen_size
 var speed = 300
 var fire = false
@@ -13,8 +14,13 @@ func off_screen():
 	self.fire = false
 	self.queue_free()
 
+func warp():
+	var size = 1 + self.get_pos().x / 500
+	self.particle.set_param(11, size)
+
 func _ready():
 	self.screen_size = get_viewport_rect().size
+	self.particle = self.get_node("body")
 	set_process(true)
 	pass
 
@@ -27,3 +33,4 @@ func _process(delta):
 			self.off_screen()
 		else:
 			self.set_pos(new_pos)
+			self.warp()

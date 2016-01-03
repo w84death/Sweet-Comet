@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="4" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
-	<ext_resource path="res://entities/enemy.gd" type="Script" index="0"></ext_resource>
 	<ext_resource path="res://entities/energy_ball.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://entities/enemy.gd" type="Script" index="0"></ext_resource>
 	<resource type="ColorRamp" path="local://1">
 		<real_array name="offsets" len="3"> 			0, 0.825, 1 </real_array>
 		<color_array name="colors" len="3"> 			1, 0.379648, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 </color_array>
